@@ -24,7 +24,7 @@ add_subdirectory(source)
 #"$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/include>"
 generate_export_header(hts-wrapper)
 
-target_link_libraries (hts-wrapper PRIVATE htslib)
+target_link_libraries (hts-wrapper PUBLIC htslib)
 
 # Install hts-wrapper
 #install(FILES faidx.h DESTINATION include/hts-wrapper)
