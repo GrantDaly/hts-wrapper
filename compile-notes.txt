@@ -1,3 +1,3 @@
 cmake -DCMAKE_CXX_FLAGS="-I ${CONDA_PREFIX}/include" ../
-
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-I ${CONDA_PREFIX}/include -L ${CONDA_PREFIX}/lib" ../
 rm -r ./* && rm -r ../install/* && cmake -DCMAKE_CXX_FLAGS="-I ${CONDA_PREFIX}/include" ../ && cmake --build . && cmake --install . --prefix ../install/ 
