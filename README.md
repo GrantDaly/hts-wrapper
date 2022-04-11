@@ -1,4 +1,4 @@
-# hts-wrapper
+# for setting up htslib 
 
 # downloade glibz source
 ./configure  --prefix=${CONDA_PREFIX}

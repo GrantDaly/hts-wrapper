@@ -12,12 +12,15 @@ include(GNUInstallDirs)
 
 include(GenerateExportHeader)
 
-#find_library(htslib NAMES htslib hts libhts REQUIRED)
+find_library(htslib NAMES htslib hts libhts REQUIRED)
 #include_directories(include "${CONDA_PREFIX}/include")
 
 #include_directories( ${PROJECT_SOURCE_DIR}/include)
 
+#add_library(hts-wrapper SHARED IMPORTED)
 add_library(hts-wrapper STATIC)
+
+
 
 add_subdirectory(include)
 add_subdirectory(source)
