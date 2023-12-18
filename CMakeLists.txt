@@ -1,5 +1,5 @@
+cmake_minimum_required(VERSION 3.28)
 project(hts-wrapper)
-cmake_minimum_required(VERSION 3.21)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
