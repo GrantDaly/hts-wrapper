@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.28)
+
 project(hts-wrapper)
+
+
+include(FindPkgConfig)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -12,7 +16,10 @@ include(GNUInstallDirs)
 
 include(GenerateExportHeader)
 
-find_library(htslib NAMES htslib hts libhts REQUIRED)
+#find_library(htslib NAMES htslib hts libhts REQUIRED)
+#pkg_search_module(htslib
+#  REQUIRED htslib
+#  )
 #include_directories(include "${CONDA_PREFIX}/include")
 
 #include_directories( ${PROJECT_SOURCE_DIR}/include)
@@ -27,8 +34,13 @@ add_subdirectory(source)
 #"$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/include>"
 generate_export_header(hts-wrapper)
 
-target_link_libraries (hts-wrapper PUBLIC htslib)
+# doesn't seem to be correctly finding the system htslib and getting the correct linker flag
+# i.e. pkg-config --libs htslib -> -L/usr/local/lib -lhts
+# hacky solution is to change htslib to hts here so g++ should do -lhts instead of -lhtslib
+# this seemed to work but should come up with long-term solution to correctly find system htslib
+target_link_libraries (hts-wrapper PUBLIC hts)
 
+add_subdirectory(tests)
 # Install hts-wrapper
 #install(FILES faidx.h DESTINATION include/hts-wrapper)
 install(TARGETS hts-wrapper
