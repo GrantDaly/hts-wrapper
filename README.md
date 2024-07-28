@@ -24,7 +24,7 @@ CPPFLAGS="-ggdb -Wall -O2 -fvisibility=hidden -I${CONDA_PREFIX}/include" LDFLAGS
 CPPFLAGS="-ggdb -Wall -O2 -fvisibility=hidden -I${CONDA_PREFIX}/include" LDFLAGS="-L${CONDA_PREFIX}/lib" ./configure --prefix=${CONDA_PREFIX}  --disable-lzma --enable-gcs
 
 
-# most recently run. I'm not sure if rpath and Pkg-config are doing anything. At higher level I was adding rpath-link
+# most recently run. I'm not sure if rpath and Pkg-config are doing anything. At higher level I was adding rpath-link, still works as of 07-27-24
 CFLAGS="-ggdb -Wall -O2 -I${CONDA_PREFIX}/include -L${CONDA_PREFIX}/lib" LDFLAGS="-Wl,-rpath,${CONDA_PREFIX}/lib" PKG_CONFIG_PATH="${CONDA_PREFIX}/lib/pkgconfig/" ./configure --prefix=${CONDA_PREFIX}  --disable-lzma --enable-gcs
 
 
