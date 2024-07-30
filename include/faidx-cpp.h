@@ -15,6 +15,7 @@ class FastaWrapper {
   ~FastaWrapper();
   int getNumberContigs();
   std::string getRegion(std::string region_str);
+  std::string getRegion(std::string contig, int beginning, int end);
   std::string getContigNameByIndex(int contig_index);
   
 };

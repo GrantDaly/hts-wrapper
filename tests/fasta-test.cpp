@@ -58,6 +58,9 @@ faidx_t* fasta_idx = fai_load_format(refName.c_str(),
  std::string chr1_new = newFasta.getRegion("chr1");
  std::cout << "New Chr1 " << chr1_new << std::endl;
 
+ std::string chr1_subset = newFasta.getRegion("chr1", 2, 4);
+ std::cout << "Subsetted : " << chr1_subset << std::endl;
+
  std::cout << "Testing iteration through contigs with Class Version" << std::endl;
  for (int i=0; i < newFasta.getNumberContigs(); i++){
    std::string tempContigName = newFasta.getContigNameByIndex(i);
@@ -65,6 +68,8 @@ faidx_t* fasta_idx = fai_load_format(refName.c_str(),
    
    std::cout << "Contig Name: " << tempContigName << std::endl;
    std::cout << "Contig: " << tempContig << std::endl;
+
+   
  }
  return 0;
 

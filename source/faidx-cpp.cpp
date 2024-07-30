@@ -28,6 +28,21 @@ std::string FastaWrapper::getRegion(std::string region_str){
   return out_str;
 }
 
+std::string FastaWrapper::getRegion(std::string contig, int beginning, int end) {
+
+  const char* return_char = nullptr;
+  int length = -1;
+  return_char = faidx_fetch_seq (fasta_ptr, contig.c_str(),beginning,end, &length);
+  if (length < 0) {
+    std::cout << "Failed to retreive " << contig << ":" << beginning << "-" << end <<  std::endl;
+      return std::string("");
+    }
+  auto out_str = std::string{return_char};
+  // going ahead and freeing memory of the char*. Techincally inneficient but should prevent memory leakage
+  free((void*)return_char);
+  return out_str;
+  }
+  
 std::string FastaWrapper::getContigNameByIndex(int contig_index){
   // note: expects 0-indexed
   if((contig_index < 0) || (contig_index > num_seqs-1)){
