@@ -11,6 +11,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 set(version 0.0.1)
 
+
+
 # make cache variables for install destinations
 include(GNUInstallDirs)
 
@@ -39,6 +41,8 @@ generate_export_header(hts-wrapper)
 # hacky solution is to change htslib to hts here so g++ should do -lhts instead of -lhtslib
 # this seemed to work but should come up with long-term solution to correctly find system htslib
 target_link_libraries (hts-wrapper PUBLIC hts)
+# add compiler flags
+target_compile_options(hts-wrapper PUBLIC -fmodules-ts)
 
 add_subdirectory(tests)
 # Install hts-wrapper

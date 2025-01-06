@@ -4,7 +4,7 @@ cmake -DCMAKE_CXX_FLAGS="-I ${CONDA_PREFIX}/include" ../ && cmake --build . && c
 
 
 # most recent
-cmake -DCMAKE_CXX_FLAGS="-I ${CONDA_PREFIX}/include -L ${CONDA_PREFIX}/lib -Wl,-rpath-link=${CONDA_PREFIX}/lib" -S ../ -B .
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-I ${CONDA_PREFIX}/include -L ${CONDA_PREFIX}/lib -Wl,-rpath-link=${CONDA_PREFIX}/lib" -S ../ -B .
 
 cmake --build .
 cmake --install . --prefix ${CONDA_PREFIX}/
