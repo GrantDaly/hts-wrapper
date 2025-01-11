@@ -14,6 +14,7 @@ class BamIterator {
 			 const std::string &region_p);
   BamIterator( SamFile *file_p,
 	       int tid_p, hts_pos_t beg_p, hts_pos_t end_p);
+  ~BamIterator();
   std::optional<BamRecord> getNextRecord();
   std::optional<BamRecord> getRecordByName(std::string read_name_p);
 };
@@ -36,6 +37,7 @@ BamIterator::BamIterator( SamFile *file_p, BamHeader * header_p,
 }
 
 // todo could use header so I don't have to use int tid code
+
 BamIterator::BamIterator( SamFile *file_p, 
 			  int tid_p, hts_pos_t beg_p, hts_pos_t end_p)
 {
@@ -52,6 +54,11 @@ BamIterator::BamIterator( SamFile *file_p,
     std::exit(1);
   }
 }
+
+BamIterator::~BamIterator() {
+  sam_itr_destroy(iter);
+}
+			 
 
 std::optional<BamRecord> BamIterator::getNextRecord()
 {
