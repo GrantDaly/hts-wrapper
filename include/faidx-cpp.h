@@ -3,7 +3,7 @@
 #include<filesystem>
 #include <map>
 
-#include "htslib/hts.h"
+#include <htslib/hts.h>
 #include <htslib/faidx.h>
 class FastaWrapper {
  private:

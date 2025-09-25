@@ -44,4 +44,17 @@ g++ -I ../../envs/include/ -L${CONDA_PREFIX}/lib -Wl,-rpath,${CONDA_PREFIX}/lib 
 # rpath-link with CONDA_PREFIX does work
 g++ -I ../../envs/include/ -L${CONDA_PREFIX}/lib -Wl,-rpath-link,${CONDA_PREFIX}/lib test.cpp -lhts
 
+August 4, 2025
 
+set up without conda/mamba.
+
+Installed htslib on system. Pkg-config required for CMake to find htslib
+
+CMake setup from "build" directory 
+
+cmake -DCMAKE_CXX_COMPILER=/opt/bin/g++ -S .. -B .
+
+Make
+cmake --build .
+
+cmake -DCMAKE_CXX_COMPILER=/opt/bin/g++ -S .. -B .

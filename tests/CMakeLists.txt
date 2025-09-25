@@ -12,13 +12,13 @@ add_executable(ReadCompression test-compression-reading.cpp)
 target_link_libraries(ReadCompression hts-wrapper)
 
 add_executable(TestAlignment test-alignment.cpp)
-target_link_libraries(TestAlignment hts-wrapper)
+target_link_libraries(TestAlignment hts-wrapper hts::htslib)
 
 
 configure_file(data/test1.fasta ${CMAKE_CURRENT_BINARY_DIR}/data/test1.fasta COPYONLY)
 configure_file(data/test.numt.fasta ${CMAKE_CURRENT_BINARY_DIR}/data/test.numt.fasta COPYONLY)
 
-configure_file(data/random.txt ${CMAKE_CURRENT_BINARY_DIR}/data/random.txt COPYONLY)
+#configure_file(data/random.txt ${CMAKE_CURRENT_BINARY_DIR}/data/random.txt COPYONLY)
 #configure_file(data/test1.fasta.fai ${CMAKE_CURRENT_BINARY_DIR}/data/test1.fasta.fai COPYONLY)
 #configure_file(data/test1.fasta ${CMAKE_CURRENT_BINARY_DIR}/data/test1.fasta COPYONLY)
 #add_test(NAME TestInstantiator
