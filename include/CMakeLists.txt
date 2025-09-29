@@ -1,7 +1,7 @@
 target_include_directories(hts-wrapper
    PUBLIC
    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
-   "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${CMAKE_PROJECT_NAME}>"
+   "$<INSTALL_INTERFACE:include/hts-wrapper>"
    )
 
 

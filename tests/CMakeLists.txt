@@ -12,7 +12,7 @@ add_executable(ReadCompression test-compression-reading.cpp)
 target_link_libraries(ReadCompression hts-wrapper)
 
 add_executable(TestAlignment test-alignment.cpp)
-target_link_libraries(TestAlignment hts-wrapper hts::htslib)
+target_link_libraries(TestAlignment hts-wrapper Hts::Hts)
 
 
 configure_file(data/test1.fasta ${CMAKE_CURRENT_BINARY_DIR}/data/test1.fasta COPYONLY)
