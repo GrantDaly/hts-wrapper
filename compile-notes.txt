@@ -16,8 +16,7 @@ ldd on the artifacts shows no hard coded link. Makes sense that past versions re
 
 May make sense to just add /opt/lib to .bashrc because this is my general library install location. Could also make sense to statically link exe <- hts-wrapper.a <- libhts.a
 
-## 09-28-25
+## 09-28-25, in build directory
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_COMPILER=/opt/bin/g++ -DCMAKE_C_COMPILER=/opt/bin/gcc ../ --fresh
-
-cmake -DCMAKE_CXX_COMPILER=/opt/bin/g++ ../ --fresh
 cmake --build . --verbose
+cmake --install . --prefix <directory>
