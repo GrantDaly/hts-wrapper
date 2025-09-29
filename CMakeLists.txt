@@ -1,16 +1,10 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 4.1.1)
 
-project(hts-wrapper)
+project(hts-wrapper
+VERSION 0.0.2)
 
 
 include(FindPkgConfig)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
-
-set(version 0.0.1)
-
 
 
 # make cache variables for install destinations
@@ -22,45 +16,25 @@ include(GenerateExportHeader)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 find_package(Htslib)
 
-#include_directories(include "${CONDA_PREFIX}/include")
+add_library(hts-wrapper SHARED)
 
-#include_directories( ${PROJECT_SOURCE_DIR}/include)
-
-#add_library(hts-wrapper SHARED IMPORTED)
-add_library(hts-wrapper STATIC)
-set_property(TARGET hts-wrapper PROPERTY CXX_STANDARD 20)
+# TODO: delete once replacement vetted
+# set_property(TARGET hts-wrapper PROPERTY CXX_STANDARD 20)
+# trying modern CMake version. TODO: check this more, as this feature appears to have caveats.
+target_compile_features(hts-wrapper PRIVATE cxx_std_20)
 
 
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/include")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/source")
 
-# "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/include>"
-# generate_export_header(hts-wrapper)
+target_link_libraries (hts-wrapper PUBLIC  Hts::Hts)
 
-# doesn't seem to be correctly finding the system htslib and getting the correct linker flag
-# i.e. pkg-config --libs htslib -> -L/usr/local/lib -lhts
-# hacky solution is to change htslib to hts here so g++ should do -lhts instead of -lhtslib
-# this seemed to work but should come up with long-term solution to correctly find system htslib
+if(PROJECT_IS_TOP_LEVEL)
+	add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/tests")
+endif()
 
+generate_export_header(hts-wrapper)
 
-
-target_link_libraries (hts-wrapper PUBLIC  hts::htslib)
-#target_include_directories(hts-wrapper PUBLIC "${CMAKE_BINARY_DIR}/hts-wrapper/include") # /opt/include)
-
-
-# add compiler flags
-target_compile_options(hts-wrapper PRIVATE -fmodules-ts)
-
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/tests")
-# # Install hts-wrapper
-# install(FILES faidx-cpp.h DESTINATION include/hts-wrapper)
-
-### copying includes over so I can use the build directory from a higher-level project
-### do not intend this to be a long-term solution
-file(COPY include/ DESTINATION "${CMAKE_BINARY_DIR}/include/hts-wrapper/"
-FILES_MATCHING REGEX "[a-zA-Z-_]+\.h(pp)?")
-
-#file(COPY include/*.hpp DESTINATION "${CMAKE_BINARY_DIR}/include/hts-wrapper/")
 install(TARGETS hts-wrapper
     EXPORT hts-wrapperTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR/hts-wrapper}
@@ -70,31 +44,31 @@ install(TARGETS hts-wrapper
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR/hts-wrapper}
     )
 
+
+
 install(EXPORT hts-wrapperTargets
          FILE hts-wrapperTargets.cmake
-         NAMESPACE hts::
+         NAMESPACE HtsWrap::
          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/hts-wrapper
 )
 
 include(CMakePackageConfigHelpers)
-
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
    "${CMAKE_CURRENT_BINARY_DIR}/cmake/hts-wrapperConfig.cmake"
    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/hts-wrapper
 )
 
-# haven't added a package version file yet
+#package version file
+write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/cmake/hts-wrapperConfigVersion.cmake"
+COMPATIBILITY AnyNewerVersion)
+
 install(FILES
            "${CMAKE_CURRENT_BINARY_DIR}/cmake/hts-wrapperConfig.cmake"
-           #"${CMAKE_CURRENT_BINARY_DIR}/hts-wrapperConfigVersion.cmake"
+           "${CMAKE_CURRENT_BINARY_DIR}/cmake/hts-wrapperConfigVersion.cmake"
          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/hts-wrapper
  )
 
-# # install(FILES
-# #           "${CMAKE_CURRENT_BINARY_DIR}/cmake/hts-wrapperConfig.cmake"
-# #         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/hts-wrapper
-# # )
-
+# this should be for including a prebuilt version of the library in a consuming build. Not going to be the recommended usage going forward
 export(EXPORT hts-wrapperTargets
         FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/hts-wrapperTargets.cmake"
         NAMESPACE hts::
