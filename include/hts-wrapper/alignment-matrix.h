@@ -1,6 +1,7 @@
 #include <cstddef>
 #include <stdexcept>
-#include <print>
+//#include <print>
+#include <stdio.h>
 
 class AlignmentMatrix {
 
@@ -102,10 +103,12 @@ void AlignmentMatrix::printMatrix() const {
       // first row special because it doesn't align with query string chars
     std::cout << "    ";
     for(auto subject_i{0}; subject_i<subject_length + 1; subject_i++){
-    std::printf("%3d|", this->operator()(subject_i, 0));
+    // std::printf("%3d|", this->operator()(subject_i, 0));
+    printf("%3d|", this->operator()(subject_i, 0));
+    
   }
     std::cout << std::endl;
-      // output query char, then go through subject size row for that entry
+  // output query char, then go through subject size row for that entry
   for(auto query_i{0}; query_i<query_length; query_i++){
     std::string temp_query_string{query_seq[query_i]};
     /* std::printf("|%c|", query_seq[query_i]); */

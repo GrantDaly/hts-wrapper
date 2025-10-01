@@ -25,6 +25,7 @@ find_package_handle_standard_args(Htslib
 )
 
 if(Htslib_FOUND AND NOT TARGET Hts::Hts)
+  message(STATUS "System htslib found")
   add_library(Hts::Hts UNKNOWN IMPORTED)
   set_target_properties(Hts::Hts PROPERTIES
     IMPORTED_LOCATION "${Htslib_LIBRARY}"
@@ -32,9 +33,9 @@ if(Htslib_FOUND AND NOT TARGET Hts::Hts)
     INTERFACE_INCLUDE_DIRECTORIES "${Htslib_INCLUDE_DIR}" #"should only contain information about the target itself, and not any of its dependencies."
   )
 
-  message("Include" ${Htslib_INCLUDE_DIR})
-  message("Lib" ${Htslib_LIBRARY})
-  message("I'face compile opt. " "${PC_Htslib_CFLAGS_OTHER}")
-  message("Version" ${Htslib_VERSION})
+  message(VERBOSE "Htslib_INCLUDE_DIR: " ${Htslib_INCLUDE_DIR})
+  message(VERBOSE "Htslib_LIBRARY: " ${Htslib_LIBRARY})
+  message(VERBOSE "PC_Htslib_CFLAGS_OTHER: " "${PC_Htslib_CFLAGS_OTHER}")
+  message(VERBOSE "Htslib_VERSION: " ${Htslib_VERSION})
 endif()
 endif()

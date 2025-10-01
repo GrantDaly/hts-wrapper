@@ -1,7 +1,66 @@
 build/
 install/
-
-#*#
+.cache/
 *.a
 *.so
+
+# Ignore backup files
 *~
+
+# Ignore temporary files
+#*
+
+# Ignore auto-save files
+#*#
+
+# Ignore Emacs desktop files
+/.emacs.desktop
+/.emacs.desktop.lock
+
+# Ignore compiled Emacs Lisp files
+*.elc
+
+# Ignore auto-save list files
+auto-save-list
+
+# Ignore tramp files
+\#*
+
+# Org-mode files
+org-id-locations
+*_archive
+
+# Flymake-mode files
+*_flymake.*
+
+# Eshell files
+/eshell/history
+/eshell/lastdir
+
+# Elpa packages
+/elpa/
+
+# Reftex files
+*.rel
+
+# AUCTeX auto folder
+/auto/
+
+# Cask packages
+cask/
+dist/
+
+# Flycheck files
+flycheck_*.el
+
+# Server auth directory
+/server/
+
+# Projectile files
+projectile
+
+# Directory configuration
+dir-locals.el
+
+# Network security data
+/network-security.data
