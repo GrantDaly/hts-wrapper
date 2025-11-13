@@ -1,8 +1,8 @@
 //#include <htslib/sam.h>
 #include <iostream>
 #include <string>
-# include "faidx-cpp.h"
-#include "faidx-cpp.h"
+# include "hts-wrapper/faidx-cpp.h"
+
 
 int main() {
 

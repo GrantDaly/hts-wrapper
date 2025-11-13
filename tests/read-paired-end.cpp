@@ -1,16 +1,18 @@
 #include <map>
 
+#include "hts-wrapper/bam-header.h"
+#include "hts-wrapper/bam-record.h"
+#include "hts-wrapper/cigar.h"
+#include "hts-wrapper/faidx-cpp.h"
+#include "hts-wrapper/hts-wrapper-util.h"
+#include "hts-wrapper/sam-file.h"
+#include "hts-wrapper/sam-iterator.h"
 
-#include "bam-header.h"
-#include "bam-record.h"
-#include "cigar.h"
-#include "faidx-cpp.h"
-#include "hts-wrapper-util.h"
 #include "htslib/faidx.h"
 #include "htslib/hts.h"
 #include "htslib/sam.h"
-#include "sam-file.h"
-#include "sam-iterator.h"
+
+
 #include <memory>
 #include <ostream>
 #include <sstream>

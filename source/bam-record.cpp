@@ -1,5 +1,5 @@
-#include "bam-record.h"
-#include "cigar.h"
+#include "hts-wrapper/bam-record.h"
+#include "hts-wrapper/cigar.h"
 #include "htslib/hts.h"
 #include "htslib/sam.h"
 

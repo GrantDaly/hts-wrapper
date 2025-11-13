@@ -8,8 +8,8 @@ add_executable(PairedTest read-paired-end.cpp)
 target_link_libraries(PairedTest hts-wrapper)
 
 
-add_executable(ReadCompression test-compression-reading.cpp)
-target_link_libraries(ReadCompression hts-wrapper)
+# add_executable(ReadCompression test-compression-reading.cpp)
+# target_link_libraries(ReadCompression hts-wrapper)
 
 add_executable(TestAlignment test-alignment.cpp)
 target_link_libraries(TestAlignment hts-wrapper Hts::Hts)

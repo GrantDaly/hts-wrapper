@@ -3,7 +3,7 @@ generate_export_header(hts-wrapper)
 
 target_sources(hts-wrapper
 PUBLIC
-FILE_SET HEADERS
+FILE_SET api
 FILES
 bam-header.h
 bam-record.h

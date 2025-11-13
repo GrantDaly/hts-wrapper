@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <iostream>
 
-#include "cigar.h"
-#include "alignment-matrix.h"
+#include "hts-wrapper/cigar.h"
+#include "hts-wrapper/alignment-matrix.h"
 
 // std::pair<std::vector<CigarOperation>, std::vector<CigarOperation>>
 void

@@ -1,4 +1,4 @@
-#include "faidx-cpp.h"
+#include "hts-wrapper/faidx-cpp.h"
 #include "htslib/hts.h"
 
 // FastaWrapper::FastaWrapper(std::string filename_string){

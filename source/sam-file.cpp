@@ -1,9 +1,11 @@
-#include "bam-header.h"
-#include "bam-record.h"
+#include "hts-wrapper/sam-file.h"
+#include "hts-wrapper/bam-header.h"
+#include "hts-wrapper/bam-record.h"
+
 #include "htslib/hts.h"
 #include "htslib/sam.h"
 
-#include "sam-file.h"
+
 // #include "bam-header.h"
 
 SamFile::SamFile(std::filesystem::path filename_path, std::string mode){

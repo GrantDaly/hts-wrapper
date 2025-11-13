@@ -6,22 +6,22 @@
 #include <vector>
 
 
-#include "bam-header.h"
+#include "hts-wrapper/bam-header.h"
 #include "htslib/hts.h"
 #include <htslib/sam.h>
 
 
-#include "hts-wrapper-util.h"
-#include "cigar.h"
-#include "sam-file.h"
-#include "faidx-cpp.h"
+#include "hts-wrapper/hts-wrapper-util.h"
+#include "hts-wrapper/cigar.h"
+#include "hts-wrapper/sam-file.h"
+#include "hts-wrapper/faidx-cpp.h"
 // #include "bam-header.h"
-#include "bam-record.h"
+#include "hts-wrapper/bam-record.h"
 
 
 //#include "insertion.h"
-#include "aligned-insertion.hpp"
-#include "snp.h"
+#include "hts-wrapper/aligned-insertion.hpp"
+#include "hts-wrapper/snp.h"
 
 // std::pair<BamRecord,BamRecord>
 // generateNumtReadPair(std::string readName,

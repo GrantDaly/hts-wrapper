@@ -1,4 +1,4 @@
-#include "bam-header.h"
+#include "hts-wrapper/bam-header.h"
 //#include "sam-file.h"
 #include "htslib/sam.h"
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <sys/types.h>
 
-#include "cigar.h"
+#include "hts-wrapper/cigar.h"
 #include "htslib/sam.h"
 
 // using CigarOperation;
