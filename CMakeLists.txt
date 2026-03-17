@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 4.1.1)
-
-project(HtsWrapper
-VERSION 0.0.2)
+project(HtsWrapper VERSION 0.1.0)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # eventually plan to add "Clang" and possibly "AppleClang".
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 13.4.0)
     message(WARNING "${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} older than oldest version tested (${CMAKE_CXX_COMPILER_ID} 13.3.0)")
   endif()
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+	if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 18.1.3)
+            message(WARNING "${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} older than oldest version tested (${CMAKE_CXX_COMPILER_ID} 18.1.3)")
+        endif()
 else()
   message(WARNING "${CMAKE_CXX_COMPILER_ID} compiler not tested")
 endif()
@@ -51,7 +53,7 @@ include/hts-wrapper/faidx-cpp.h
 include/hts-wrapper/sam-file.h
 include/hts-wrapper/sam-iterator.h
 include/hts-wrapper/hts-wrapper-util.h
-include/hts-wrapper/aligned-insertion.hpp
+include/hts-wrapper/aligned-insertion.h
 include/hts-wrapper/snp.h
 include/hts-wrapper/alignment-matrix.h
 

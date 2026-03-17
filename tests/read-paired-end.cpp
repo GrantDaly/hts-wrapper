@@ -24,6 +24,11 @@ void printPreviouslyAligned(const BamRecord & mitoBam,
 			    const FastaWrapper & ref,
 			    std::ostream & os) {
 
+  // (GTD 031726) copied this from below to avoid compiler warning that I wasn't using mitoBam
+  for(const auto cig: mitoBam.getCigar()){
+    std::cout << "[" << cig << "|" << 
+      cig.subjectBasesConsumed() << "]";
+  }
  // print cigar 
   for(const auto cig: nuclearBam.getCigar()){
     std::cout << "[" << cig << "|" << 
@@ -90,7 +95,7 @@ void printPreviouslyAligned(const BamRecord & mitoBam,
 	// really just refers to not being an indel or skip. check if bases match manually
 	else if (cigarType == CigarOperationType::Match) {
 
-	  for(auto i{0}; i < temp_query_substring.length(); i++)
+	  for(long unsigned i{0}; i < temp_query_substring.length(); i++)
 	    {
 	      if(temp_query_substring[i] == temp_ref_substring[i])
 		nuclear_mismatch_f << "|";
@@ -143,7 +148,7 @@ int main() {
   }
 
   std::string main_chrom{"chrM"};
-  int main_chrom_tid = bam_header.contigNameToTid(main_chrom);
+  // int main_chrom_tid = bam_header.contigNameToTid(main_chrom);
 
   hts_itr_t *chrM_iter = sam_itr_querys(numt_bam.index, bam_header.hdr, "chrM");
 
@@ -197,7 +202,7 @@ int main() {
 	  std::cout << "------------" << std::endl;  	  
 	  const auto first_bam_q_length = first_bam.getQueryLength();
   	  const auto second_bam_q_length = second_bam.getQueryLength();
-  	  const auto first_bam_r_length = first_bam.getReferenceLength();
+  	  // const auto first_bam_r_length = first_bam.getReferenceLength();
   	  const auto second_bam_r_length = second_bam.getReferenceLength();
 	  const auto second_bam_seq = second_bam.getSequence();
 	  const auto number_clipped = second_bam_cigar[second_bam_cigar.size()].getCount();
