@@ -53,10 +53,10 @@ deflate_cigar_vector(const std::vector<CigarOperation> & inflated) {
   // if it's only one entry no possibility to deflate
   if(inflated.size() == 1) {
     deflated.push_back(last_cigar);
-    return std::move(deflated);
+    return deflated;
   }
   /* for(const auto & temp_cigar: deflated) { */
-    for( auto i{1}; i< inflated.size(); i++) {
+    for( long unsigned i{1}; i< inflated.size(); i++) {
       std::cout << "Top of loop Index : " << i << std::endl;
       current_cigar = inflated[i];
       if(current_cigar.getCigar() == last_cigar.getCigar()) {
@@ -88,7 +88,7 @@ deflate_cigar_vector(const std::vector<CigarOperation> & inflated) {
       std::cout << "End of loop" << std::endl;
       
   }
-    return std::move(deflated);
+    return deflated;
 
 }
 
@@ -160,7 +160,7 @@ std::string  makeAlignmentString(const BamRecord & inBam,
 	// really just refers to not being an indel or skip. check if bases match manually
 	else if (cigarType == CigarOperationType::Match) {
 
-	  for(auto i{0}; i < temp_query_substring.length(); i++)
+	  for(long unsigned i{0}; i < temp_query_substring.length(); i++)
 	    {
 	      if(temp_query_substring[i] == temp_ref_substring[i])
 		nuclear_mismatch_f << "|";

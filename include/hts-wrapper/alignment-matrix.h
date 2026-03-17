@@ -32,10 +32,10 @@ AlignmentMatrix::AlignmentMatrix(std::vector<char> subject_cpy,
 
 int & AlignmentMatrix::operator()(size_t subject_pos, size_t query_pos)
 {
-  if((0 > subject_pos) || (subject_pos >= (subject_length + 1))){
+  if( (subject_pos >= (subject_length + 1))){
     throw std::out_of_range("AlignmenMatrix access subject out of bounds");
   }
-  if((0 > query_pos) || (query_pos >= (query_length + 1))){
+  if((query_pos >= (query_length + 1))){
     throw std::out_of_range("AlignmenMatrix access query out of bounds");
   }
   return data[subject_pos*(query_length + 1) + query_pos];
@@ -43,10 +43,10 @@ int & AlignmentMatrix::operator()(size_t subject_pos, size_t query_pos)
 
 int AlignmentMatrix::operator()(size_t subject_pos, size_t query_pos) const
 {
-  if(0 > subject_pos >= (subject_length + 1)){
+  if(subject_pos >= (subject_length + 1)){
     throw std::out_of_range("AlignmenMatrix access subject out of bounds");
   }
-  else if(0 > query_pos >= (query_length + 1)){
+  else if(query_pos >= (query_length + 1)){
     throw std::out_of_range("AlignmenMatrix access query out of bounds");
   }
   return data[subject_pos*(query_length + 1) + query_pos];
@@ -94,7 +94,7 @@ void AlignmentMatrix::printMatrix() const {
   //  std::cout << std::endl;
    // first print subject across
   std::cout << "        ";
-  for(auto subject_i{0}; subject_i<subject_length; subject_i++){
+  for(long unsigned subject_i{0}; subject_i<subject_length; subject_i++){
     std::string temp_subject_string{subject_seq[subject_i  ]};
     /* std::printf("|%c|", subject_seq[subject_i]); */
     std::printf("%3s|", temp_subject_string.c_str());
@@ -102,18 +102,18 @@ void AlignmentMatrix::printMatrix() const {
       std::cout << std::endl;
       // first row special because it doesn't align with query string chars
     std::cout << "    ";
-    for(auto subject_i{0}; subject_i<subject_length + 1; subject_i++){
+    for(long unsigned subject_i{0}; subject_i<subject_length + 1; subject_i++){
     // std::printf("%3d|", this->operator()(subject_i, 0));
     printf("%3d|", this->operator()(subject_i, 0));
     
   }
     std::cout << std::endl;
   // output query char, then go through subject size row for that entry
-  for(auto query_i{0}; query_i<query_length; query_i++){
+  for(long unsigned query_i{0}; query_i<query_length; query_i++){
     std::string temp_query_string{query_seq[query_i]};
     /* std::printf("|%c|", query_seq[query_i]); */
     std::printf("%3s|", temp_query_string.c_str());
-  for(auto subject_i{0}; subject_i<subject_length + 1; subject_i++){
+  for(long unsigned subject_i{0}; subject_i<subject_length + 1; subject_i++){
     std::printf("%3d|", this->operator()(subject_i, query_i+1));
       }
   std::cout << std::endl;

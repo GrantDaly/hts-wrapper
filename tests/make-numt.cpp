@@ -20,7 +20,7 @@
 
 
 //#include "insertion.h"
-#include "hts-wrapper/aligned-insertion.hpp"
+#include "hts-wrapper/aligned-insertion.h"
 #include "hts-wrapper/snp.h"
 
 // std::pair<BamRecord,BamRecord>
@@ -368,9 +368,8 @@ generateNumtReadPair(std::string readName, const AlignedInsertion &numt,
        // 				seq_one_name, pos_r1,0,
        // 				 seq_r2, qual_r2, 0, hdr);
        
-
        std::pair<BamRecord,BamRecord> outPair{readOne,readTwo};
-       return std::move(outPair);
+       return outPair;
 }
 
 int main() {
@@ -422,10 +421,10 @@ int main() {
   // std::vector<char> qual{'A','T','C','G'};
   // auto bamOneR1 = BamRecord();
   // bamOneR1.bam_set_qname("pair1R1");
-  char* cigar_end_addr = nullptr;
-  uint32_t * cigar_buf = nullptr;
-  size_t cigar_size = 0;
-  int num_cigar = -1;
+  // char* cigar_end_addr = nullptr;
+  // uint32_t * cigar_buf = nullptr;
+  // size_t cigar_size = 0;
+  // int num_cigar = -1;
   // if((num_cigar =sam_parse_cigar(cigar_string.str().c_str(), & cigar_end_addr,& cigar_buf,
   // 				 & cigar_size)) > 0){
 

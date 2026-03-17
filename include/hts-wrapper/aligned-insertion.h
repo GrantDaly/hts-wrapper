@@ -18,6 +18,7 @@ class AlignedInsertion {
   // basically storing this so I know it's in the correct orientation, so no matter what it's in 5'->3' as the reference genome is.
   std::string flanking_sequence_5p;
   std::string inserted_sequence;
+  std::string reference_sequence;
   std::string flanking_sequence_3p;
   
   Orientation orientation;
@@ -61,6 +62,8 @@ class AlignedInsertion {
   // std::string flanking_sequence_5p;
   inserted_sequence = inserted_sequence_p;
   insertion_size = inserted_sequence.length();
+
+  reference_sequence = ref_string_r;
   // std::string flanking_sequence_3p;
   
   // switch(orientation){

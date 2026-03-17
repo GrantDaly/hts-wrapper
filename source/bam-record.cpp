@@ -16,7 +16,7 @@ BamRecord::BamRecord(std::string qname,
       		     std::vector<CigarOperation> cigar_vector,
 		     std::string contig_mate,
 		     hts_pos_t pos_mate,
-		     hts_pos_t insert_size,
+		     hts_pos_t insert_size, // Todo: check that this is being processed correctly. Had been relying on seq.length() previously. I'm pretty sure this constructor has not been used or tested extensively. Am adding these changes to remove unused variables, which the compiler complained about.
  		     std::vector<char> seq,
 		     std::vector<char> qual,
 		     size_t l_aux,
@@ -51,10 +51,24 @@ BamRecord::BamRecord(std::string qname,
   if((num_cigar =sam_parse_cigar(cigar_string.str().c_str(), & cigar_end_addr,& cigar_buf,
 				 & cigar_size)) > 0){};
 
-  auto contigNumber = 
-  bam_set1(bam_ptr, qname.length(), qname.c_str(), flag, contig_int, pos, mapq, num_cigar,
-           cigar_buf, contig_mate_int, pos_mate, seq.size(), qual.size(),
-	   seq.data(), qual.data(), 0);
+  if(0 > bam_set1(bam_ptr,
+		  qname.length(),
+		  qname.c_str(),
+		  flag,
+		  contig_int,
+		  pos,
+		  mapq,
+		  num_cigar,
+		  cigar_buf,
+		  contig_mate_int,
+		  pos_mate,
+		  insert_size,
+		  qual.size(),
+		  seq.data(),
+		  qual.data(),
+		  l_aux)){
+    std::cerr << "Error creating bam record" << std::endl;
+  }
 
   };
 BamRecord::~BamRecord() { bam_destroy1(bam_ptr); }
@@ -100,7 +114,7 @@ uint16_t BamRecord::getFlag() const {
 std::vector<CigarOperation> BamRecord::getCigar() const {
   std::vector<CigarOperation> outCigar;
   uint32_t* cigar_raw = bam_get_cigar(bam_ptr);
-  for(auto i{0}; i< bam_ptr->core.n_cigar; i++){
+  for(uint32_t i{0}; i< bam_ptr->core.n_cigar; i++){
     outCigar.push_back(CigarOperation(cigar_raw[i]));
   }
   return outCigar;
@@ -173,7 +187,7 @@ std::vector<char> BamRecord::getSequence() const {
     }
     outVec[i] = out_char;
       }
-  return std::move(outVec);
+  return outVec;
 }
 
 std::string BamRecord::readOrientationString() const

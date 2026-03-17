@@ -26,7 +26,7 @@ void
 
   // left clip eligible as long as a mismatch hasn't been included yet. can always start a right clip
   bool q_left_eligible = false;
-  bool q_right_eligible = false;
+  
 
   if((q_size > 1000) | (s_size > 10000)){
     std::cerr << "Query or Subject size too large, don't want to blow stack" << std::endl;
@@ -37,20 +37,20 @@ void
 
   AlignmentMatrix align_matrix = AlignmentMatrix(subject, query);
 
-  for(int s_dim{1}; s_dim<(s_size+1); s_dim++) {
+  for(unsigned s_dim{1}; s_dim<(s_size+1); s_dim++) {
     // advancing on subject, not query (soft clip, no penalty)
     align_matrix(s_dim,0) = 0;
   }
 
   // advancing on query not subject (on one end) describes soft clip
-  for(int q_dim{1}; q_dim<(q_size+1); q_dim++) {
+  for(unsigned q_dim{1}; q_dim<(q_size+1); q_dim++) {
     align_matrix(0,q_dim) = 0;
   }
 
 
   //now iterate down and over starting at one
-  for(int s_dim{1}; s_dim<=s_size; s_dim++) {
-    for(int q_dim{1}; q_dim<=q_size; q_dim++)
+  for(unsigned s_dim{1}; s_dim<=s_size; s_dim++) {
+    for(unsigned q_dim{1}; q_dim<=q_size; q_dim++)
       {	
 	auto subject_char =  subject[s_dim-1];
         const auto query_char =  query[q_dim-1];

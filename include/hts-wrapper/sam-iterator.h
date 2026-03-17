@@ -29,9 +29,9 @@ BamIterator::BamIterator( SamFile *file_p, BamHeader * header_p,
     std::exit(1);
   }
   iter = sam_itr_querys(file->index,
-		 header->hdr, "chrM");
+			header->hdr, region_p.c_str()); // (GTD 031726) "chrM" had been hard coded here. updated to use the parameter but be mindful this could break upstream code.
     if(iter == nullptr){
-    std::cerr << "Error opening iterator for ChrM" << std::endl;
+      std::cerr << "Error opening iterator for " << region_p << std::endl;
     std::exit(1);
   }
 }
@@ -65,7 +65,7 @@ std::optional<BamRecord> BamIterator::getNextRecord()
   auto out_rec = BamRecord();
   int return_code = sam_itr_multi_next(file->fp, iter,out_rec.bam_ptr);
   if(return_code >= 0){
-  return std::move(out_rec);
+  return out_rec;
   }
   else if (return_code == -1){
     return std::nullopt;
@@ -84,7 +84,7 @@ std::optional<BamRecord> BamIterator::getRecordByName(std::string read_name_p)
     {
       /* std::cout << " testing read code " << return_code <<  std::endl; */
       if(out_rec.getQName() == read_name_p){
-	return std::move(out_rec);
+	return out_rec;
       }
     }
       /* std::cout << " done  read code " << return_code <<  std::endl; */
